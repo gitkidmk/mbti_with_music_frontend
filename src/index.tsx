@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import Home from "./Home";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -14,8 +14,10 @@ import UserRecommendation from "./Page/UserRecommendation";
 const OuterDiv = styled.div`
   position: absolute;
   height: 93vh;
-  width: 90%;
-  margin: 2% 5% 0 5%;
+  width: 60%;
+  left: 20%;
+  // background-color: black;
+  // margin: 2% 5% 0 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,7 +34,7 @@ ReactDOM.render(
   <OuterDiv>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<Home />} />
         <Route path="question-and-answer" element={<QuestionAndAnswer />} />
         <Route path="result" element={<Result />} />
         <Route path="user-recommendation" element={<UserRecommendation />} />
