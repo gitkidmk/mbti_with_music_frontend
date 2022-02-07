@@ -9,3 +9,8 @@ export const questionSetState = atom<string>({
   key: "questionSetState",
   default: "A",
 });
+
+export const mbtiResultState = atom<any>({
+  key: "mbtiResultState",
+  default: {},
+});

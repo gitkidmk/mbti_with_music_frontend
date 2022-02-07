@@ -3,8 +3,12 @@ import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { MBTI_description, MBTI_unit_description } from "Asset/data";
 import axios from "axios";
-import { useRecoilValue } from "recoil";
-import { answerState, questionSetState } from "Store/stateStore";
+import { useRecoilValue, useRecoilState } from "recoil";
+import {
+  answerState,
+  questionSetState,
+  mbtiResultState,
+} from "Store/stateStore";
 import Loading from "Component/Loading";
 import Rader from "Component/Rader";
 import MusicBox from "Component/MusicBox";
@@ -23,13 +27,25 @@ const ResultDescription = ({ top, unit }: any) => {
       <TopDescription>{top_description[1]}</TopDescription>
       <UnitDescBox>
         {unit.map((u: number, index: number) => {
+          const percentage = Math.round(u * 100);
+          const strength =
+            percentage < 10
+              ? "low"
+              : percentage < 40
+              ? "midLow"
+              : percentage < 60
+              ? "mid"
+              : percentage < 90
+              ? "midHigh"
+              : "high";
+          console.log(strength);
           return (
             <>
-              <div id={top[index]} className="unit">
+              <UnitBox id={strength} className="unit">
                 {top[index]}
-              </div>
+              </UnitBox>
               <div id={top[index]} className="percentage">
-                {Math.round(u * 100)}%
+                {percentage}%
               </div>
               <div id={top[index]} className="description">
                 {MBTI_unit_description[top[index]]}
@@ -66,6 +82,7 @@ const RetryAndShare = () => {
 const Result = () => {
   const question_set = useRecoilValue(questionSetState);
   const answer = useRecoilValue(answerState);
+  const [mbtiResult, setMbtiResult] = useRecoilState(mbtiResultState);
   const navigate = useNavigate();
 
   const { isLoading, error, data }: any = useQuery(
@@ -78,7 +95,11 @@ const Result = () => {
     }
   );
 
+  !isLoading && setMbtiResult(data.data);
+  console.log(mbtiResult);
+
   //TODO: error handing
+
   return isLoading ? (
     <Loading />
   ) : (
@@ -170,7 +191,19 @@ const UnitDescBox = styled.div`
     grid-column: 1 / 2;
     font-size: 30px;
     font-weight: bold;
-    color: red;
+    /* color: rgb(255 0 0 / 0%); */
+    /* color: ${(props) =>
+      `${
+        props.id === "midLow"
+          ? "rgb(255 0 0 / 20%)"
+          : props.id === "midLow"
+          ? "rgb(255 0 0 / 30%)"
+          : props.id === "mid"
+          ? "rgb(255 0 0 / 50%)"
+          : props.id === "midHigh"
+          ? "rgb(255 0 0 / 70%)"
+          : "rgb(255 0 0 / 100%)"
+      }`}; */
   }
   & > .percentage {
     grid-column: 2 / 3;
@@ -180,6 +213,21 @@ const UnitDescBox = styled.div`
     text-align: center;
     margin: 0px 10px 10px 0px;
   }
+`;
+
+const UnitBox = styled.div`
+  color: ${(props) =>
+    `${
+      props.id === "midLow"
+        ? "rgb(255 0 0 / 20%)"
+        : props.id === "midLow"
+        ? "rgb(255 0 0 / 30%)"
+        : props.id === "mid"
+        ? "rgb(255 0 0 / 50%)"
+        : props.id === "midHigh"
+        ? "rgb(255 0 0 / 70%)"
+        : "rgb(255 0 0 / 100%)"
+    }`};
 `;
 
 const RecommendedMusicTitle = styled.div`
