@@ -13,17 +13,20 @@ import UserRecommendation from "./Page/UserRecommendation";
 
 const OuterDiv = styled.div`
   position: absolute;
-  height: 93vh;
+  @media screen and (max-width: 500px) {
+  width: 80%;
+  left: 10%;
+  }
+  height: 100vh;
   width: 60%;
   left: 20%;
-  // background-color: black;
-  // margin: 2% 5% 0 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
   -ms-overflow-style: none;
-  -webkit-appearance: none;
+  -webkit-appearance: none;    
+  justify-content: center;
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;

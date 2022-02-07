@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import darami from "Asset/image/darami.png"
 
 const HomeImage = styled.img`
-  width: 80%;
-  height: 60%;
-  margin: 20px;
+  width: 200px;
+  margin: 10% 20px 20px 20px;
   border-style: solid;
   border-radius: 10px;
   border-width: 3px;
@@ -13,7 +13,7 @@ const HomeImage = styled.img`
 
 const StartButton = styled.button`
   border-radius: 10px;
-  width: 80%;
+  width: 200px;
   height: 10%;
   color: white;
   font-size: 20px;
@@ -25,7 +25,7 @@ function Home() {
   let navigate = useNavigate();
   return (
     <>
-      <HomeImage alt="home-image" />
+      <HomeImage alt="home-image" src={darami}/>
       <StartButton onClick={() => navigate(`question-and-answer`)}>
         시작하기
       </StartButton>
