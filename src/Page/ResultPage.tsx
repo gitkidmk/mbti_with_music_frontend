@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { ResponsiveRadar } from "@nivo/radar";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
@@ -13,45 +12,9 @@ import axios from "axios";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { answerState, questionSetState } from "Store/stateStore";
 import Loading from "Component/Loading";
+import Rader from "Component/Rader";
 
-const Rader = ({ data }: any) => (
-  <ResponsiveRadar
-    data={createData(data)}
-    keys={["result"]}
-    indexBy="mbti"
-    valueFormat=">-.2f"
-    margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
-    borderColor={{ from: "color" }}
-    gridLabelOffset={36}
-    dotSize={10}
-    dotColor={{ theme: "background" }}
-    dotBorderWidth={2}
-    colors={{ scheme: "nivo" }}
-    blendMode="multiply"
-    motionConfig="wobbly"
-    legends={[
-      {
-        anchor: "top-left",
-        direction: "column",
-        translateX: -50,
-        translateY: -40,
-        itemWidth: 80,
-        itemHeight: 20,
-        itemTextColor: "#999",
-        symbolSize: 12,
-        symbolShape: "circle",
-        effects: [
-          {
-            on: "hover",
-            style: {
-              itemTextColor: "#000",
-            },
-          },
-        ],
-      },
-    ]}
-  />
-);
+const queryClient = new QueryClient();
 
 async function thumbsUpMusic(
   music_id: string,
@@ -72,47 +35,6 @@ async function thumbsUpMusic(
     console.error(error);
   }
 }
-
-const RecommendedMusic = ({ music, mbti }: any) => {
-  // console.log(music);
-  return music.map((m: any) => {
-    const j = JSON.parse(m);
-
-    const title = j.music_name;
-    const description = j.artist;
-    const thumbnailURL = j.thumbnail;
-    const videoId = j.music_id;
-    const great_count = j.great_count;
-
-    return (
-      <RecommendedMusicBox>
-        <ThumbnailImage alt="thumbnail" src={thumbnailURL} />
-        <Title
-          className="title"
-          dangerouslySetInnerHTML={{ __html: title }}
-          onClick={() =>
-            window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank")
-          }
-        ></Title>
-        <Description
-          className="description"
-          dangerouslySetInnerHTML={{ __html: description }}
-        ></Description>
-        <ThumbsUpBox>
-          <ThumbsUpImage
-            alt="thumbs-up-image"
-            src={great}
-            onClick={() => thumbsUpMusic(videoId, title, thumbnailURL, mbti)}
-          />
-          <ThumbsUpCount>{great_count}</ThumbsUpCount>
-        </ThumbsUpBox>
-      </RecommendedMusicBox>
-    );
-  });
-};
-const RetryAndShare = () => {
-  return <RetryAndShareBox>다시하기/공유하기</RetryAndShareBox>;
-};
 
 const ResultDescription = ({ top, unit }: any) => {
   const top_description = MBTI_description[top];
@@ -145,8 +67,46 @@ const ResultDescription = ({ top, unit }: any) => {
     </DescriptionBox>
   );
 };
+const RecommendedMusic = ({ music, mbti }: any) => {
+  // console.log(music);
+  return music.map((m: any) => {
+    m = JSON.parse(m);
 
-const queryClient = new QueryClient();
+    const title = m.music_name;
+    const description = m.artist;
+    const thumbnailURL = m.thumbnail;
+    const videoId = m.music_id;
+    const great_count = m.great_count;
+
+    return (
+      <RecommendedMusicBox>
+        <ThumbnailImage alt="thumbnail" src={thumbnailURL} />
+        <Title
+          className="title"
+          dangerouslySetInnerHTML={{ __html: title }}
+          onClick={() =>
+            window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank")
+          }
+        ></Title>
+        <Description
+          className="description"
+          dangerouslySetInnerHTML={{ __html: description }}
+        ></Description>
+        <ThumbsUpBox>
+          <ThumbsUpImage
+            alt="thumbs-up-image"
+            src={great}
+            onClick={() => thumbsUpMusic(videoId, title, thumbnailURL, mbti)}
+          />
+          <ThumbsUpCount>{great_count}</ThumbsUpCount>
+        </ThumbsUpBox>
+      </RecommendedMusicBox>
+    );
+  });
+};
+const RetryAndShare = () => {
+  return <RetryAndShareBox>다시하기/공유하기</RetryAndShareBox>;
+};
 
 const Result = () => {
   const question_set = useRecoilValue(questionSetState);
