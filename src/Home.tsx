@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import darami from "Asset/image/darami.png"
+import darami from "Asset/image/darami.png";
 
 const HomeImage = styled.img`
   width: 200px;
@@ -25,7 +25,7 @@ function Home() {
   let navigate = useNavigate();
   return (
     <>
-      <HomeImage alt="home-image" src={darami}/>
+      <HomeImage alt="home-image" src={darami} />
       <StartButton onClick={() => navigate(`question-and-answer`)}>
         시작하기
       </StartButton>
