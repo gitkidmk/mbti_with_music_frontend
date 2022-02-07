@@ -17,9 +17,6 @@ const queryClient = new QueryClient();
 
 const ResultDescription = ({ top, unit }: any) => {
   const top_description = MBTI_description[top];
-  console.log(top, unit, top[0]);
-
-  // percentage에 따라 UNIT 색깔 다르게 표출
 
   return (
     <DescriptionBox>
@@ -38,7 +35,6 @@ const ResultDescription = ({ top, unit }: any) => {
               : percentage < 90
               ? "midHigh"
               : "high";
-          console.log(strength);
           return (
             <>
               <UnitBox id={strength} className="unit">
@@ -191,19 +187,6 @@ const UnitDescBox = styled.div`
     grid-column: 1 / 2;
     font-size: 30px;
     font-weight: bold;
-    /* color: rgb(255 0 0 / 0%); */
-    /* color: ${(props) =>
-      `${
-        props.id === "midLow"
-          ? "rgb(255 0 0 / 20%)"
-          : props.id === "midLow"
-          ? "rgb(255 0 0 / 30%)"
-          : props.id === "mid"
-          ? "rgb(255 0 0 / 50%)"
-          : props.id === "midHigh"
-          ? "rgb(255 0 0 / 70%)"
-          : "rgb(255 0 0 / 100%)"
-      }`}; */
   }
   & > .percentage {
     grid-column: 2 / 3;

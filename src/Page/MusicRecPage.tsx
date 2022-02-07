@@ -25,7 +25,6 @@ const MusicRecPage = () => {
   const mbti_result: any = useRecoilValue(mbtiResultState);
   const mbti = mbti_result.MBTI_result.top_result;
 
-  console.log(musicList);
   return (
     <MusicRecBox>
       <MusicRecTitle>내가 직접 추천하는 {mbti} 음악😍</MusicRecTitle>

@@ -22,8 +22,6 @@ const TestPage = () => {
 
   const percentage = ((index / 12) * 100).toString();
 
-  // console.log(answer);
-
   useEffect(() => {
     const q_set = chooseQuestionSet();
     setQuestionSet(q_set);
