@@ -22,7 +22,7 @@ const TestPage = () => {
 
   const percentage = ((index / 12) * 100).toString();
 
-  console.log(answer);
+  // console.log(answer);
 
   useEffect(() => {
     const q_set = chooseQuestionSet();
@@ -46,7 +46,7 @@ const TestPage = () => {
           id="yes"
           onClick={() => {
             setIndex(index + 1);
-            setAnswer((answer) => [...answer, 1]);
+            setAnswer((answer): number[] => [...answer, 1]);
           }}
         >
           YES
@@ -55,7 +55,7 @@ const TestPage = () => {
           id="no"
           onClick={() => {
             setIndex(index + 1);
-            setAnswer((answer) => [...answer, -1]);
+            setAnswer((answer): number[] => [...answer, -1]);
           }}
         >
           NO

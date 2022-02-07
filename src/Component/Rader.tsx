@@ -9,25 +9,25 @@ const Rader = ({ data }: any) => {
       keys={["result"]}
       indexBy="mbti"
       valueFormat=">-.2f"
-      margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+      margin={{ top: 70, right: 80, bottom: 50, left: 80 }}
       borderColor={{ from: "color" }}
       gridLabelOffset={36}
-      dotSize={10}
+      dotSize={5}
       dotColor={{ theme: "background" }}
       dotBorderWidth={2}
-      colors={{ scheme: "nivo" }}
-      blendMode="multiply"
+      colors={{ scheme: "dark2" }}
+      blendMode="darken"
       motionConfig="wobbly"
       legends={[
         {
-          anchor: "top-left",
+          anchor: "bottom-right",
           direction: "column",
           translateX: -50,
           translateY: -40,
           itemWidth: 80,
           itemHeight: 20,
-          itemTextColor: "#999",
-          symbolSize: 12,
+          itemTextColor: "rgb(2,90,77)",
+          symbolSize: 25,
           symbolShape: "circle",
           effects: [
             {
