@@ -131,4 +131,6 @@ const MusicListBox = styled.div`
     white,
     #85a78571
   );
+  display: grid;
+  justify-items: center;
 `;

@@ -25,7 +25,9 @@ const TestPage = () => {
   useEffect(() => {
     const q_set = chooseQuestionSet();
     setQuestionSet(q_set);
-  }, [setQuestionSet]);
+    setAnswer([]);
+    console.log("초기화");
+  }, [setQuestionSet, setAnswer]);
 
   useEffect(() => {
     if (index >= 12) {
@@ -77,6 +79,7 @@ const QuestionAndAnswerBox = styled.div`
 
 const QuestionNumber = styled.div`
   font-weight: bold;
+  font-size: 25px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -86,11 +89,13 @@ const QuestionNumber = styled.div`
 
 const Question = styled.div`
   font-weight: bold;
+  font-size: 20px;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 `;
 
 const Answer = styled.div`

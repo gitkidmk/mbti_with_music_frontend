@@ -159,7 +159,7 @@ const ResultTitle = styled.div`
 
 const DescriptionBox = styled.div`
   display: grid;
-  grid-template-rows: 1fr 2fr 6fr;
+  grid-template-rows: 1fr 2fr 4fr;
   align-items: center;
   justify-items: center;
   width: 90%;

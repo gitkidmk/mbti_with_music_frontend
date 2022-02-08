@@ -19,6 +19,7 @@ const StartButton = styled.button`
   font-size: 20px;
   font-weight: bold;
   background-color: rgb(2, 90, 77);
+  line-height: 26px;
 `;
 
 function Home() {
@@ -27,6 +28,7 @@ function Home() {
     <>
       <HomeImage alt="home-image" src={darami} />
       <StartButton onClick={() => navigate(`question-and-answer`)}>
+        MBTI with Music <br />
         시작하기
       </StartButton>
     </>
