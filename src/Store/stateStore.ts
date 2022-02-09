@@ -14,3 +14,8 @@ export const mbtiResultState = atom<any>({
   key: "mbtiResultState",
   default: {},
 });
+
+export const musicListState = atom<any>({
+  key: "musicListState",
+  default: [],
+});

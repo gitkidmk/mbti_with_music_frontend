@@ -2,8 +2,10 @@ import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import MusicBox from "Component/MusicBox";
-import { useRecoilValue } from "recoil";
-import { mbtiResultState } from "Store/stateStore";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { mbtiResultState, musicListState } from "Store/stateStore";
+import useFetch from "Component/useFetch";
+import Loading from "Component/Loading";
 
 async function searchMusic(q: string, setMusicList: Function) {
   try {
@@ -21,13 +23,29 @@ async function searchMusic(q: string, setMusicList: Function) {
 
 const MusicRecPage = () => {
   const [musicName, setMusicName] = useState("");
-  const [musicList, setMusicList] = useState([]);
+  const [musicList, setMusicList] = useRecoilState(musicListState);
   const mbti_result: any = useRecoilValue(mbtiResultState);
-  const mbti = mbti_result.MBTI_result.top_result;
 
-  return (
+  const { loading, error } = useFetch(
+    "get",
+    "/music/search",
+    {
+      params: {
+        music_name: musicName,
+      },
+    },
+    setMusicList
+  );
+
+  return loading ? (
+    <Loading />
+  ) : error || Object.keys(mbti_result).length === 0 ? (
+    <MusicRecBox>이런... 에러가 발생했어요ㅜㅜ{error}</MusicRecBox>
+  ) : (
     <MusicRecBox>
-      <MusicRecTitle>내가 직접 추천하는 {mbti} 음악😍</MusicRecTitle>
+      <MusicRecTitle>
+        내가 직접 추천하는 {mbti_result.MBTI_result.top_result} 음악😍
+      </MusicRecTitle>
       <SearchBox>
         <input
           type={"text"}
@@ -53,7 +71,7 @@ const MusicRecPage = () => {
               description={m.snippet.description}
               thumbnailURL={m.snippet.thumbnails.high.url}
               videoId={m.id.videoId}
-              mbti={mbti}
+              mbti={mbti_result.MBTI_result.top_result}
               great_count={null}
             />
           );

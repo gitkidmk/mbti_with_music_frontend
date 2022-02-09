@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { MBTI_description, MBTI_unit_description } from "Asset/data";
-import axios from "axios";
 import { useRecoilValue, useRecoilState } from "recoil";
 import {
   answerState,
@@ -12,8 +10,7 @@ import {
 import Loading from "Component/Loading";
 import Rader from "Component/Rader";
 import MusicBox from "Component/MusicBox";
-
-const queryClient = new QueryClient();
+import useFetch from "Component/useFetch";
 
 const ResultDescription = ({ top, unit }: any) => {
   const top_description = MBTI_description[top];
@@ -36,17 +33,17 @@ const ResultDescription = ({ top, unit }: any) => {
               ? "midHigh"
               : "high";
           return (
-            <>
-              <UnitBox id={strength} className="unit">
+            <UnitBox id={String(index)} key={index}>
+              <div id={strength} className="unit">
                 {top[index]}
-              </UnitBox>
+              </div>
               <div id={top[index]} className="percentage">
                 {percentage}%
               </div>
               <div id={top[index]} className="description">
                 {MBTI_unit_description[top[index]]}
               </div>
-            </>
+            </UnitBox>
           );
         })}
       </UnitDescBox>
@@ -59,6 +56,7 @@ const RecommendedMusic = ({ music, mbti }: any) => {
 
     return (
       <MusicBox
+        key={m.music_id}
         title={m.music_name}
         description={m.artist}
         thumbnailURL={m.thumbnail}
@@ -78,40 +76,40 @@ const RetryAndShare = () => {
 const Result = () => {
   const question_set = useRecoilValue(questionSetState);
   const answer = useRecoilValue(answerState);
-  const [mbtiResult, setMbtiResult] = useRecoilState(mbtiResultState);
   const navigate = useNavigate();
-
-  const { isLoading, error, data }: any = useQuery(
-    ["getMBTIResult", question_set, answer],
-    () => {
-      return axios.post("/mbti-results", {
+  const [mbtiResult, setMbtiResult] = useRecoilState(mbtiResultState);
+  const { loading, error } = useFetch(
+    "post",
+    "/mbti-results",
+    {
+      data: {
         question_set: question_set,
         answer: answer,
-      });
-    }
+      },
+    },
+    setMbtiResult
   );
-
-  !isLoading && setMbtiResult(data.data);
-  console.log(mbtiResult);
 
   //TODO: error handing
 
-  return isLoading ? (
+  return loading ? (
     <Loading />
+  ) : error || mbtiResult === undefined ? (
+    <ResultDiv>이런... 에러가 발생했어요ㅜㅜ{error}</ResultDiv>
   ) : (
     <ResultDiv>
-      <ResultTitle>{data.data.MBTI_result.top_result}</ResultTitle>
-      <Rader data={data.data.MBTI_result.all_result} />
+      <ResultTitle>{mbtiResult.MBTI_result.top_result}</ResultTitle>
+      <Rader data={mbtiResult.MBTI_result.all_result} />
       <ResultDescription
-        top={data.data.MBTI_result.top_result}
-        unit={data.data.MBTI_result.top_result_detail}
+        top={mbtiResult.MBTI_result.top_result}
+        unit={mbtiResult.MBTI_result.top_result_detail}
       />
       <RecommendedMusicTitle>
-        {data.data.MBTI_result.top_result}를 위한 음악😊
+        {mbtiResult.MBTI_result.top_result}를 위한 음악😊
       </RecommendedMusicTitle>
       <RecommendedMusic
-        music={data.data.MBTI_music}
-        mbti={data.data.MBTI_result.top_result}
+        music={mbtiResult.MBTI_music}
+        mbti={mbtiResult.MBTI_result.top_result}
       />
       <UserMusicRecommendButton
         onClick={() => navigate("/user-recommendation")}
@@ -124,11 +122,7 @@ const Result = () => {
 };
 
 const ResultPage = () => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Result />
-    </QueryClientProvider>
-  );
+  return <Result />;
 };
 
 export default ResultPage;
@@ -180,10 +174,30 @@ const UnitDescBox = styled.div`
   height: 100%;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 4fr;
   align-items: center;
   justify-items: center;
+`;
+
+const UnitBox = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 4fr;
+  justify-items: center;
+  align-items: center;
+  grid-row: ${(props) => `${Number(props.id) + 1} / ${Number(props.id) + 2}`};
   & > .unit {
+    color: ${(props) =>
+      `${
+        props.id === "midLow"
+          ? "rgb(255 0 0 / 20%)"
+          : props.id === "midLow"
+          ? "rgb(255 0 0 / 30%)"
+          : props.id === "mid"
+          ? "rgb(255 0 0 / 50%)"
+          : props.id === "midHigh"
+          ? "rgb(255 0 0 / 70%)"
+          : "rgb(255 0 0 / 100%)"
+      }`};
     grid-column: 1 / 2;
     font-size: 30px;
     font-weight: bold;
@@ -196,21 +210,6 @@ const UnitDescBox = styled.div`
     text-align: center;
     margin: 0px 10px 10px 0px;
   }
-`;
-
-const UnitBox = styled.div`
-  color: ${(props) =>
-    `${
-      props.id === "midLow"
-        ? "rgb(255 0 0 / 20%)"
-        : props.id === "midLow"
-        ? "rgb(255 0 0 / 30%)"
-        : props.id === "mid"
-        ? "rgb(255 0 0 / 50%)"
-        : props.id === "midHigh"
-        ? "rgb(255 0 0 / 70%)"
-        : "rgb(255 0 0 / 100%)"
-    }`};
 `;
 
 const RecommendedMusicTitle = styled.div`

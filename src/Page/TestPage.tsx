@@ -19,7 +19,6 @@ const TestPage = () => {
   const [questionSet, setQuestionSet] =
     useRecoilState<string>(questionSetState);
   let navigate = useNavigate();
-  console.log("test-page rerender", questionSet);
 
   const percentage = ((index / 12) * 100).toString();
 
