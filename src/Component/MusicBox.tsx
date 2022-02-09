@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import axios from "axios";
 import great from "Asset/image/great.png";
-import { useCookies } from "react-cookie";
 
 // thumbsUpMusic store에 넣기?
 
@@ -32,9 +31,6 @@ const MusicBox = ({
   mbti,
   great_count,
 }: any) => {
-  const [cookies, setCookie, removeCookie] = useCookies(["USER"]);
-  console.log(cookies);
-
   return (
     <MusicListBox>
       <ThumbnailImage alt="thumbnail" src={thumbnailURL} />
