@@ -33,7 +33,7 @@ const ResultDescription = ({ top, unit }: any) => {
               ? "midHigh"
               : "high";
           return (
-            <UnitBox id={String(index)} key={index}>
+            <UnitBox id={String(index)} key={index} className={strength}>
               <div id={strength} className="unit">
                 {top[index]}
               </div>
@@ -188,13 +188,13 @@ const UnitBox = styled.div`
   & > .unit {
     color: ${(props) =>
       `${
-        props.id === "midLow"
+        props.className === "midLow"
           ? "rgb(255 0 0 / 20%)"
-          : props.id === "midLow"
+          : props.className === "midLow"
           ? "rgb(255 0 0 / 30%)"
-          : props.id === "mid"
+          : props.className === "mid"
           ? "rgb(255 0 0 / 50%)"
-          : props.id === "midHigh"
+          : props.className === "midHigh"
           ? "rgb(255 0 0 / 70%)"
           : "rgb(255 0 0 / 100%)"
       }`};
