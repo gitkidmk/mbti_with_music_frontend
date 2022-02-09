@@ -1,16 +1,12 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Home from "./Home";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 
 import styled from "styled-components";
 
-// import QuestionAndAnswer from "./Page/QuestionAndAnswer";
-// import Result from "./Page/Result";
-// import UserRecommendation from "./Page/UserRecommendation";
 import TestPage from "Page/TestPage";
 import ResultPage from "Page/ResultPage";
 import MusicRecPage from "Page/MusicRecPage";
