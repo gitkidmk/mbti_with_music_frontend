@@ -4,12 +4,15 @@ import Home from "./Home";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
+import axios from "axios";
 
 import styled from "styled-components";
 
 import TestPage from "Page/TestPage";
 import ResultPage from "Page/ResultPage";
 import MusicRecPage from "Page/MusicRecPage";
+
+axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "/" : "api/";
 
 const OuterDiv = styled.div`
   position: absolute;
