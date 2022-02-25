@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  front:
+    build: .
+    ports:
+      - "3000:3000"
+  back:
+    build:
+      context: ../mbti_with_music_backend
+    ports:
+      - "8080:8080"
+  db:
+    image: dockermkkang/mariadb:latest
+    ports:
+      - "3307:3306"
