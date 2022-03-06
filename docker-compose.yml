@@ -1,15 +1,27 @@
-version: "3.8"
+version: "3.9"
 services:
-  front:
-    build: .
+  frontend:
+    container_name: frontend
+    build:
+      context: .
     ports:
-      - "3000:3000"
-  back:
+      - "3000:80"
+    depends_on:
+      - backend
+  backend:
+    container_name: backend
     build:
       context: ../mbti_with_music_backend
     ports:
-      - "8080:8080"
+      - "5000:5000"
+    depends_on:
+      - db
   db:
-    image: dockermkkang/mariadb:latest
+    container_name: db
+    image: dockermkkang/mbti_db:0.4
     ports:
       - "3307:3306"
+    environment:
+      - MARIADB_USER=mbti_music
+      - MARIADB_PASSWORD=mbti_music
+      - MARIADB_ROOT_PASSWORD=mariadb

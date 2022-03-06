@@ -1,6 +1,7 @@
 #!/bin/bash
 echo start!
 
+sudo rm /etc/nginx/sites-enabled/mbti.conf
 sudo ln -s /etc/nginx/sites-available/mbti.conf /etc/nginx/sites-enabled/mbti.conf
 sudo service nginx start
 sudo service nginx status
