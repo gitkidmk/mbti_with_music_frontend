@@ -1,14 +1,10 @@
 #!/bin/bash
-# set NODE_ENV=production
+set NODE_ENV=production
 
-# echo start!
+echo start!
 
-# npm run build
-
-# echo $NODE_ENV
+npm run build
 
 # set NODE_ENV=development
-
-# echo $NODE_ENV
 
 docker-compose up --build
