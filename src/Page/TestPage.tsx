@@ -15,7 +15,7 @@ function chooseQuestionSet() {
 
 const TestPage = () => {
   const [index, setIndex] = useState<number>(0);
-  const [answer, setAnswer] = useRecoilState<number[]>(answerState);
+  const [, setAnswer] = useRecoilState<number[]>(answerState);
   const [questionSet, setQuestionSet] =
     useRecoilState<string>(questionSetState);
   let navigate = useNavigate();
