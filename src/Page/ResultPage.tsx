@@ -92,6 +92,8 @@ const Result = () => {
 
   //TODO: error handing
 
+  console.log("result page...", loading, error, mbtiResult);
+
   return loading ? (
     <Loading />
   ) : error || mbtiResult === undefined ? (
@@ -119,6 +121,7 @@ const Result = () => {
       <RetryAndShare />
     </ResultDiv>
   );
+  // return <div>test</div>;
 };
 
 const ResultPage = () => {

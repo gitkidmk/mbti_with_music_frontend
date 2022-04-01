@@ -16,13 +16,13 @@ axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "/" : "api/";
 
 const OuterDiv = styled.div`
   position: absolute;
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 900px) {
     width: 80%;
     left: 10%;
   }
   height: 100vh;
-  width: 60%;
-  left: 20%;
+  width: 40%;
+  left: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
