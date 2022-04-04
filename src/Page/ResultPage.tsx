@@ -134,7 +134,7 @@ const ResultDiv = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: 1fr 400px 2fr 1fr 150px 150px;
+  grid-template-rows: 1fr 400px 2fr;
   justify-items: center;
   align-items: center;
 `;
