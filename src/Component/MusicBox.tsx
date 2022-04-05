@@ -79,7 +79,9 @@ const MusicBox = ({
             }
           />
         )}
-        <ThumbnailImage alt="thumbnail" src={test_src} ref={imgRef} />
+        <ThumbnailImgBox>
+          <ThumbnailImage alt="thumbnail" src={test_src} ref={imgRef} />
+        </ThumbnailImgBox>
         <Title
           className="title"
           dangerouslySetInnerHTML={{ __html: title }}
@@ -109,7 +111,7 @@ export default MusicBox;
 
 const MusicListBox = styled.div`
   position: relative;
-  width: 90%;
+  width: 50%;
   padding: 10px;
   /* height: 50%; */
   background-color: ${(props) =>
@@ -142,13 +144,22 @@ const YouTubeLinkBox = styled.div`
   flex-wrap: nowrap;
   align-items: center;
 `;
+
+const ThumbnailImgBox = styled.div`
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+`;
 const ThumbnailImage = styled.img`
   width: 100%;
+  margin-top: -25px;
   display: flex;
   align-items: center;
   justify-content: center;
   grid-row: 1 / 3;
   grid-column: 1 / 2;
+  object-fit: cover;
+  object-position: 10% 10%;
 `;
 const Title = styled.p`
   height: 100%;

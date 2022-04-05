@@ -69,7 +69,9 @@ const RecommendedMusic = ({ music, mbti }: any) => {
 };
 const RetryAndShare = () => {
   return (
-    <RetryAndShareBox>카카오톡, 인스타 공유 + 다시하기 img</RetryAndShareBox>
+    <RetryAndShareBox>
+      <div className="addthis_inline_share_toolbox"></div>
+    </RetryAndShareBox>
   );
 };
 
@@ -269,7 +271,6 @@ const RetryAndShareBox = styled.div`
   height: 60px;
   margin: 10px 0px 100px 0px;
   border-radius: 5px;
-  background-color: #00000073;
   display: flex;
   align-items: center;
   justify-content: center;
