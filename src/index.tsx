@@ -15,14 +15,13 @@ import MusicRecPage from "Page/MusicRecPage";
 axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "/" : "api/";
 
 const OuterDiv = styled.div`
-  position: absolute;
-  @media screen and (max-width: 500px) {
-    width: 80%;
-    left: 10%;
+  @media screen and (max-width: 768px) {
+    width: 95vw;
   }
-  height: 100vh;
-  width: 60%;
-  left: 20%;
+  height: 100%;
+  width: 768px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   align-items: center;

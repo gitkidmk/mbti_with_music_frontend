@@ -70,11 +70,16 @@ export default TestPage;
 
 const QuestionAndAnswerBox = styled.div`
   width: 100%;
-  height: 100%;
+  height: 80vh;
   display: grid;
   grid-template-rows: 1fr 5fr 2fr 0.6fr;
   justify-items: center;
   align-items: center;
+  /* overflow: hidden; */
+  -ms-overflow-style: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const QuestionNumber = styled.div`

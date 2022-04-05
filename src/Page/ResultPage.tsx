@@ -51,25 +51,31 @@ const ResultDescription = ({ top, unit }: any) => {
   );
 };
 const RecommendedMusic = ({ music, mbti }: any) => {
-  return music.map((m: any) => {
-    m = JSON.parse(m);
+  return (
+    <RecommendedMusicBox>
+      {music.map((m: any) => {
+        m = JSON.parse(m);
 
-    return (
-      <MusicBox
-        key={m.music_id}
-        title={m.music_name}
-        description={m.artist}
-        thumbnailURL={m.thumbnail}
-        videoId={m.music_id}
-        mbti={mbti}
-        great_count={m.great_count}
-      />
-    );
-  });
+        return (
+          <MusicBox
+            key={m.music_id}
+            title={m.music_name}
+            description={m.artist}
+            thumbnailURL={m.thumbnail}
+            videoId={m.music_id}
+            mbti={mbti}
+            great_count={m.great_count}
+          />
+        );
+      })}
+    </RecommendedMusicBox>
+  );
 };
 const RetryAndShare = () => {
   return (
-    <RetryAndShareBox>카카오톡, 인스타 공유 + 다시하기 img</RetryAndShareBox>
+    <RetryAndShareBox>
+      <div className="addthis_inline_share_toolbox"></div>
+    </RetryAndShareBox>
   );
 };
 
@@ -92,14 +98,20 @@ const Result = () => {
 
   //TODO: error handing
 
+  console.log("result page...", loading, error, mbtiResult);
+
   return loading ? (
     <Loading />
   ) : error || mbtiResult === undefined ? (
     <ResultDiv>이런... 에러가 발생했어요ㅜㅜ{error}</ResultDiv>
   ) : (
     <ResultDiv>
-      <ResultTitle>{mbtiResult.MBTI_result.top_result}</ResultTitle>
-      <Rader data={mbtiResult.MBTI_result.all_result} />
+      <ResultTitle>
+        <h1>{mbtiResult.MBTI_result.top_result}</h1>
+      </ResultTitle>
+      <RaderBox>
+        <Rader data={mbtiResult.MBTI_result.all_result} />
+      </RaderBox>
       <ResultDescription
         top={mbtiResult.MBTI_result.top_result}
         unit={mbtiResult.MBTI_result.top_result_detail}
@@ -114,7 +126,7 @@ const Result = () => {
       <UserMusicRecommendButton
         onClick={() => navigate("/user-recommendation")}
       >
-        MBTI 음악 추천하기
+        나만의 MBTI 음악 추천하기
       </UserMusicRecommendButton>
       <RetryAndShare />
     </ResultDiv>
@@ -128,19 +140,21 @@ const ResultPage = () => {
 export default ResultPage;
 
 const ResultDiv = styled.div`
+  @media screen and (max-width: 768px) {
+    grid-template-rows: 150px 350px 2fr;
+  }
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: grid;
-  grid-template-rows: 1fr 400px 2fr 1fr 150px 150px;
+  grid-template-rows: 150px 500px 2fr;
   justify-items: center;
   align-items: center;
 `;
 
 const ResultTitle = styled.div`
-  font-weight: bold;
   width: 90%;
+  font-weight: bold;
   height: 50px;
-  margin: 30px;
   font-size: 25px;
   border-style: solid;
   border-radius: 10px;
@@ -151,12 +165,24 @@ const ResultTitle = styled.div`
   justify-content: center;
 `;
 
+const RaderBox = styled.div`
+  @media screen and (max-width: 768px) {
+    width: 85%;
+  }
+  @media screen and (max-width: 530px) {
+    width: 80%;
+  }
+  width: 500px;
+  margin-top: 0px;
+  height: 400px;
+`;
+
 const DescriptionBox = styled.div`
+  width: 85%;
   display: grid;
-  grid-template-rows: 1fr 2fr 4fr;
+  grid-template-rows: 90px 2fr 4fr;
   align-items: center;
   justify-items: center;
-  width: 90%;
 `;
 
 const TopMainDescription = styled.div`
@@ -170,12 +196,12 @@ const TopDescription = styled.div`
 `;
 
 const UnitDescBox = styled.div`
-  width: 100%;
   height: 100%;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   align-items: center;
   justify-items: center;
+  grid-gap: 0px;
 `;
 
 const UnitBox = styled.div`
@@ -210,6 +236,9 @@ const UnitBox = styled.div`
     text-align: center;
     margin: 0px 10px 10px 0px;
   }
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid #dfdfdf;
 `;
 
 const RecommendedMusicTitle = styled.div`
@@ -226,7 +255,16 @@ const RecommendedMusicTitle = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
+const RecommendedMusicBox = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  @media screen and (max-width: 770px) {
+    flex-direction: column;
+  }
+`;
 const UserMusicRecommendButton = styled.button`
   font-weight: bold;
   width: 90%;
@@ -247,7 +285,6 @@ const RetryAndShareBox = styled.div`
   height: 60px;
   margin: 10px 0px 100px 0px;
   border-radius: 5px;
-  background-color: #00000073;
   display: flex;
   align-items: center;
   justify-content: center;

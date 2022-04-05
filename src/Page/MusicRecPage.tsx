@@ -44,7 +44,7 @@ const MusicRecPage = () => {
   ) : (
     <MusicRecBox>
       <MusicRecTitle>
-        내가 직접 추천하는 {mbti_result.MBTI_result.top_result} 음악😍
+        <h1>내가 직접 추천하는 {mbti_result.MBTI_result.top_result} 음악😍</h1>
       </MusicRecTitle>
       <SearchBox>
         <input
@@ -85,17 +85,17 @@ export default MusicRecPage;
 
 const MusicRecBox = styled.div`
   width: 100%;
-  display: flex;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 120px 80px calc(90vh - 200px);
+  justify-items: center;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
 `;
 
 const MusicRecTitle = styled.div`
-  font-weight: bold;
   width: 90%;
+  font-weight: bold;
   height: 50px;
-  font-size: 25px;
   border-style: solid;
   border-radius: 10px;
   border-width: 3px;
@@ -103,6 +103,14 @@ const MusicRecTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  & > h1 {
+    @media screen and (max-width: 560px) {
+      font-size: 20px;
+    }
+    @media screen and (max-width: 300px) {
+      font-size: 15px;
+    }
+  }
 `;
 
 const SearchBox = styled.div`
@@ -116,39 +124,50 @@ const SearchBox = styled.div`
     border-radius: 5px;
     font-size: 18px;
     height: 40%;
+    width: 60%;
   }
   & > button {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 15px;
     width: 80px;
     height: 45%;
     border-radius: 10px;
     background-color: rgb(2, 90, 77);
     color: white;
+    width: 20%;
   }
 `;
 
 const MusicListBox = styled.div`
+  @media screen and (max-height: 1000px) {
+    width: 90%;
+    height: 390px;
+    position: relative;
+    -ms-overflow-style: none;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    overflow: auto;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    & > div {
+      margin-right: 10px;
+    }
+  }
+  width: 90%;
+  height: 750px;
   position: relative;
-  height: ${(props) => `${props.id === "0" ? "auto" : "calc(100vh - 200px)}"}`};
-  overflow-y: scroll;
   -ms-overflow-style: none;
   ::-webkit-scrollbar {
     display: none;
   }
-  background: linear-gradient(
-    0deg,
-    #85a78571,
-    white,
-    white,
-    white,
-    white,
-    white,
-    white,
-    white,
-    white,
-    #85a78571
-  );
-  display: grid;
-  justify-items: center;
+  overflow-y: scroll;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  & > div {
+    margin-right: 10px;
+  }
 `;
