@@ -18,7 +18,7 @@ const OuterDiv = styled.div`
   @media screen and (max-width: 768px) {
     width: 95vw;
   }
-  height: 100vh;
+  height: 100%;
   width: 768px;
   margin-left: auto;
   margin-right: auto;

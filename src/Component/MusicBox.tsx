@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import axios from "axios";
 import { ReactComponent as ThumbsUp } from "Asset/image/thumbsUp.svg";
 import youTube from "Asset/image/youtube.png";
@@ -82,16 +82,9 @@ const MusicBox = ({
         <ThumbnailImgBox>
           <ThumbnailImage alt="thumbnail" src={test_src} ref={imgRef} />
         </ThumbnailImgBox>
-        <Title
-          className="title"
-          dangerouslySetInnerHTML={{ __html: title }}
-          id={stringColor}
-        ></Title>
-        <Description
-          className="description"
-          dangerouslySetInnerHTML={{ __html: description }}
-          id={stringColor}
-        ></Description>
+        <Title id={stringColor} property={title.length.toString()}>
+          <p dangerouslySetInnerHTML={{ __html: title }}></p>
+        </Title>
       </YouTubeLinkBox>
       <ThumbsUpBox>
         <ThumbsUp
@@ -110,14 +103,17 @@ const MusicBox = ({
 export default MusicBox;
 
 const MusicListBox = styled.div`
+  @media screen and (max-width: 300px) {
+    min-width: 200px;
+  }
   position: relative;
-  width: 50%;
+  min-width: 300px;
+  height: 320px;
   padding: 10px;
-  /* height: 50%; */
   background-color: ${(props) =>
     `${props.id === "null" ? "#00800030" : props.id}`};
   display: grid;
-  grid-template-rows: 6fr 1fr;
+  grid-template-rows: 230px 80px;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-bottom: 10px;
@@ -129,8 +125,8 @@ const MusicListBox = styled.div`
 `;
 const YouTubeImage = styled.div`
   position: absolute;
-  width: 100%;
-  height: 78%;
+  width: 300px;
+  height: 165px;
   z-index: 1;
   background-color: ${(props) => props.id + "55"};
   background-image: url(${youTube});
@@ -147,11 +143,12 @@ const YouTubeLinkBox = styled.div`
 
 const ThumbnailImgBox = styled.div`
   width: 100%;
-  height: 140px;
+  height: 165px;
   overflow: hidden;
 `;
 const ThumbnailImage = styled.img`
   width: 100%;
+  height: 190px;
   margin-top: -25px;
   display: flex;
   align-items: center;
@@ -161,29 +158,46 @@ const ThumbnailImage = styled.img`
   object-fit: cover;
   object-position: 10% 10%;
 `;
-const Title = styled.p`
-  height: 100%;
-  font-size: 13px;
-  font-weight: bold;
-  padding: 0px 15px 0px 15px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  grid-row: 1 / 2;
-  grid-column: 2 / 3;
-  text-overflow: ellipsis;
-  color: ${(props) => props.id};
+
+const boxSlide = keyframes`
+  from {
+    left: 100%;
+  }
+  to {
+    left: -100%;
+  }
 `;
-const Description = styled.div`
-  height: 40%;
-  font-size: 10px;
-  padding: 0px 15px 0px 15px;
+
+const noSlide = keyframes`
+  from {
+    margin-left: 0%;
+  }
+  to {
+    margin-left: 0%;
+  }
+`;
+
+const Title = styled.div`
+  height: 40px;
   display: flex;
   align-items: center;
-  grid-row: 2 / 3;
-  grid-column: 2 / 3;
-  text-overflow: ellipsis;
-  color: ${(props) => props.id};
+  overflow: hidden;
+  & > p {
+    position: relative;
+    width: 200px;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 0px 15px 0px 15px;
+    display: flex;
+    align-items: center;
+    text-overflow: ellipsis;
+    text-align: center;
+    display: table-cell;
+    color: ${(props) => props.id};
+    animation: ${(props) => (Number(props.property) > 40 ? boxSlide : noSlide)}
+      10s infinite linear;
+    margin: auto;
+  }
 `;
 
 const ThumbsUpBox = styled.div`
