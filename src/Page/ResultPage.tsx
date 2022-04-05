@@ -100,8 +100,12 @@ const Result = () => {
     <ResultDiv>이런... 에러가 발생했어요ㅜㅜ{error}</ResultDiv>
   ) : (
     <ResultDiv>
-      <ResultTitle>{mbtiResult.MBTI_result.top_result}</ResultTitle>
-      <Rader data={mbtiResult.MBTI_result.all_result} />
+      <ResultTitle>
+        <h1>{mbtiResult.MBTI_result.top_result}</h1>
+      </ResultTitle>
+      <RaderBox>
+        <Rader data={mbtiResult.MBTI_result.all_result} />
+      </RaderBox>
       <ResultDescription
         top={mbtiResult.MBTI_result.top_result}
         unit={mbtiResult.MBTI_result.top_result_detail}
@@ -121,7 +125,6 @@ const Result = () => {
       <RetryAndShare />
     </ResultDiv>
   );
-  // return <div>test</div>;
 };
 
 const ResultPage = () => {
@@ -132,18 +135,23 @@ export default ResultPage;
 
 const ResultDiv = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: grid;
-  grid-template-rows: 1fr 400px 2fr;
+  grid-template-rows: 1fr 500px 2fr;
   justify-items: center;
   align-items: center;
 `;
 
 const ResultTitle = styled.div`
+  @media screen and (max-width: 768px) {
+    width: 85%;
+  }
+  width: 700px;
   font-weight: bold;
-  width: 90%;
   height: 50px;
-  margin: 30px;
+  margin: 30px auto 30px auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
   font-size: 25px;
   border-style: solid;
   border-radius: 10px;
@@ -154,12 +162,24 @@ const ResultTitle = styled.div`
   justify-content: center;
 `;
 
+const RaderBox = styled.div`
+  @media screen and (max-width: 768px) {
+    width: 70%;
+  }
+  width: 500px;
+  margin-top: 0px;
+  height: inherit;
+`;
+
 const DescriptionBox = styled.div`
+  @media screen and (max-width: 768px) {
+    width: 85%;
+  }
+  width: 700px;
   display: grid;
   grid-template-rows: 1fr 2fr 4fr;
   align-items: center;
   justify-items: center;
-  width: 90%;
 `;
 
 const TopMainDescription = styled.div`
@@ -173,7 +193,6 @@ const TopDescription = styled.div`
 `;
 
 const UnitDescBox = styled.div`
-  width: 100%;
   height: 100%;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr;
