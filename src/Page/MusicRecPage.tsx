@@ -139,25 +139,10 @@ const SearchBox = styled.div`
 `;
 
 const MusicListBox = styled.div`
-  @media screen and (max-height: 1000px) {
-    width: 90%;
-    height: 390px;
-    position: relative;
-    -ms-overflow-style: none;
-    ::-webkit-scrollbar {
-      display: none;
-    }
-    overflow: auto;
-    white-space: nowrap;
-    display: flex;
-    flex-direction: row;
-    & > div {
-      margin-right: 10px;
-    }
-  }
   width: 90%;
-  height: 750px;
+  height: calc(90vh - 250px);
   position: relative;
+  margin-top: 50px;
   -ms-overflow-style: none;
   ::-webkit-scrollbar {
     display: none;
@@ -165,9 +150,17 @@ const MusicListBox = styled.div`
   overflow-y: scroll;
   white-space: nowrap;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
   & > div {
     margin-right: 10px;
+  }
+  @media screen and (max-height: 1000px) and (max-width: 765px) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    & > div {
+      margin-right: 0px;
+    }
   }
 `;
