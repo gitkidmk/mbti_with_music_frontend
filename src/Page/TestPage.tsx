@@ -71,47 +71,50 @@ export default TestPage;
 const QuestionAndAnswerBox = styled.div`
   width: 100%;
   height: 80vh;
-  display: grid;
-  grid-template-rows: 1fr 5fr 2fr 0.6fr;
-  justify-items: center;
+  display: flex;
   align-items: center;
-  /* overflow: hidden; */
-  -ms-overflow-style: none;
-  ::-webkit-scrollbar {
-    display: none;
-  }
+  justify-content: center;
+  text-align: center;
+  justify-items: center;
+  align-items: center;    
+  flex-direction: column;
+  align-items: center;
+}
 `;
 
 const QuestionNumber = styled.div`
   font-weight: bold;
   font-size: 25px;
-  width: 100%;
+  width: 90%;
   height: 100%;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 `;
 
 const Question = styled.div`
   font-weight: bold;
   font-size: 20px;
-  width: 100%;
+  width: 80%;
   height: 100%;
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: center; */
 `;
 
 const Answer = styled.div`
   font-weight: bold;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const AnswerUnit = styled.div`
   font-weight: bold;
-  width: 100%;
+  width: 90%;
   height: 40%;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -123,5 +126,21 @@ const AnswerUnit = styled.div`
 `;
 
 const ProgressBar = styled.progress`
-  color: rgb(2, 90, 77);
+  height: 60px;
+  -webkit-appearance: none;
+  &::-webkit-progress-bar {
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-color: rgba(2, 90, 77, 0.349);
+  }
+  &::-webkit-progress-value {
+    border-radius: 10px;
+    background-color: rgba(2, 90, 77, 0.795);
+  }
+  &::-moz-progress-bar {
+    border-radius: 10px;
+    background-color: rgba(2, 90, 77, 0.795);
+  }
 `;
