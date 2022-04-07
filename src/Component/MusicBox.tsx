@@ -1,9 +1,11 @@
 import styled, { keyframes } from "styled-components";
 import axios from "axios";
 import { ReactComponent as ThumbsUp } from "Asset/image/thumbsUp.svg";
-import youTube from "Asset/image/youtube.png";
+// import youTube from "Asset/image/youtube.png";
 import { useState, useEffect, useRef } from "react";
 import useColorThief, { FormatString } from "use-color-thief";
+import { useRecoilState } from "recoil";
+import { thumbsUpState } from "Store/stateStore";
 
 // thumbsUpMusic store에 넣기?
 
@@ -11,18 +13,20 @@ async function thumbsUpMusic(
   music_id: string,
   music_name: string,
   thumbnail: string,
-  mbti_name: string
+  mbti_name: string,
+  setThumbsUp: Function
 ) {
   try {
-    await axios.post("/music/thumbs-up", {
+    const isThumbsUped = await axios.post("/music/thumbs-up", {
       music_id: music_id,
       music_name: music_name,
       thumbnail: thumbnail,
       mbti_name: mbti_name,
     });
-    console.log("send-perfect");
+    setThumbsUp(isThumbsUped.data);
   } catch (error) {
     console.error(error);
+    setThumbsUp(-1);
   }
 }
 
@@ -37,6 +41,7 @@ const MusicBox = ({
   const [mouseIsOver, setMouseIsOver] = useState(false);
   const [stringColor, setStringColor] = useState("#000000");
   const imgRef = useRef<any>();
+  const [, setThumbsUp] = useRecoilState<number | null>(thumbsUpState);
   // https://lokeshdhakar.com/projects/color-thief/#getting-started
   let googleProxyURL =
     "https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url=";
@@ -51,11 +56,9 @@ const MusicBox = ({
   });
 
   useEffect(() => {
-    console.log("Color:", color);
     let white = 0xffffff;
     if (color !== null) {
       let now_color = parseInt(color.substr(1), 16);
-      console.log(white, now_color, white - Number(now_color));
       let str_color = (white - Number(now_color)).toString(16);
       setStringColor("#" + str_color);
     }
@@ -97,7 +100,9 @@ const MusicBox = ({
         <ThumbsUp
           fill={stringColor}
           style={{ height: "50px", width: "50px" }}
-          onClick={() => thumbsUpMusic(videoId, title, thumbnailURL, mbti)}
+          onClick={() =>
+            thumbsUpMusic(videoId, title, thumbnailURL, mbti, setThumbsUp)
+          }
         />
         {great_count && (
           <ThumbsUpCount id={stringColor}>{great_count}</ThumbsUpCount>
