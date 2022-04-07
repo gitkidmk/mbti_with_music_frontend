@@ -69,15 +69,22 @@ const MusicBox = ({
         onMouseLeave={() => setMouseIsOver(false)}
       >
         {mouseIsOver && (
+          // <YouTubeImage
+          //   id={stringColor}
+          //   onClick={() =>
+          //     window.open(
+          //       `https://www.youtube.com/watch?v=${videoId}`,
+          //       "_blank"
+          //     )
+          //   }
+          // />
           <YouTubeImage
-            id={stringColor}
-            onClick={() =>
-              window.open(
-                `https://www.youtube.com/watch?v=${videoId}`,
-                "_blank"
-              )
-            }
-          />
+            title="youtube"
+            id="player"
+            width="640"
+            height="360"
+            src={`http://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=http://example.com`}
+          ></YouTubeImage>
         )}
         <ThumbnailImgBox>
           <ThumbnailImage alt="thumbnail" src={test_src} ref={imgRef} />
@@ -123,13 +130,12 @@ const MusicListBox = styled.div`
   flex-direction: column;
   flex-wrap: nowrap;
 `;
-const YouTubeImage = styled.div`
+const YouTubeImage = styled.iframe`
   position: absolute;
   width: 300px;
   height: 165px;
-  z-index: 1;
+  /* z-index: 1; */
   background-color: ${(props) => props.id + "55"};
-  background-image: url(${youTube});
   background-position: center;
   background-repeat: no-repeat;
 `;
