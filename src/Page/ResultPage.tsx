@@ -6,11 +6,13 @@ import {
   answerState,
   questionSetState,
   mbtiResultState,
+  thumbsUpState,
 } from "Store/stateStore";
 import Loading from "Component/Loading";
 import Rader from "Component/Rader";
 import MusicBox from "Component/MusicBox";
 import useFetch from "Component/useFetch";
+import Modal from "Component/Modal";
 
 const ResultDescription = ({ top, unit }: any) => {
   const top_description = MBTI_description[top];
@@ -84,6 +86,7 @@ const Result = () => {
   const answer = useRecoilValue(answerState);
   const navigate = useNavigate();
   const [mbtiResult, setMbtiResult] = useRecoilState(mbtiResultState);
+  const [thumbsUp] = useRecoilState<number | null>(thumbsUpState);
   const { loading, error } = useFetch(
     "post",
     "/mbti-results",
@@ -97,8 +100,6 @@ const Result = () => {
   );
 
   //TODO: error handing
-
-  console.log("result page...", loading, error, mbtiResult);
 
   return loading ? (
     <Loading />
@@ -119,6 +120,7 @@ const Result = () => {
       <RecommendedMusicTitle>
         {mbtiResult.MBTI_result.top_result}를 위한 음악😊
       </RecommendedMusicTitle>
+      {thumbsUp === null ? null : <Modal isThumbsUped={thumbsUp} />}
       <RecommendedMusic
         music={mbtiResult.MBTI_music}
         mbti={mbtiResult.MBTI_result.top_result}
@@ -163,6 +165,7 @@ const ResultTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 60px;
 `;
 
 const RaderBox = styled.div`
@@ -261,6 +264,7 @@ const RecommendedMusicBox = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   @media screen and (max-width: 770px) {
     flex-direction: column;
   }

@@ -18,21 +18,17 @@ const useFetch = (
   const callUrl = async () => {
     try {
       const { data } = await axios(config);
-      console.log("data", data);
       setPayload(data);
       setStore !== null && setStore(data);
     } catch (e) {
       setError("😢");
-      console.log("error", e);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    console.log("start");
     callUrl();
-    console.log("end");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

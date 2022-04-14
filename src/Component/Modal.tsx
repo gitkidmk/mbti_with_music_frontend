@@ -1,58 +1,67 @@
 import styled from "styled-components";
-import great from "Asset/image/great.png";
+import { ReactComponent as ThumbsUp } from "Asset/image/thumbsUp.svg";
+import { useRecoilState } from "recoil";
+import { thumbsUpState } from "Store/stateStore";
 
-const Modal = ({ music_name }: any) => {
+type ModalProps = {
+  isThumbsUped: number; // 부모컴포넌트에서 import 해온 타입을 재사용 해 줍시다.
+};
+const Modal = ({ isThumbsUped }: ModalProps) => {
+  const [thumbsUp, setThumbsUp] = useRecoilState<number | null>(thumbsUpState);
+  const passMessage = "노래를 추천했어요!😍👍";
+  const failMessage = "추천을 이미 하셨어요~🙌✨";
+  const errorMessage = "서버에 문제가 발생했어요...👀";
   return (
     <ModalOuterBox>
-      <ModalBox>
-        <ThumbsUpImg alt="thumbs-up" src={great} />
+      <ModalBox id={thumbsUp?.toString()}>
+        <ThumbsUp fill="#ffffff" style={{ height: "100px", width: "100px" }} />
         <MessageBox>
-          <MusicName>{music_name}</MusicName> 노래를 이미 추천했어요!
+          {isThumbsUped === 1
+            ? passMessage
+            : isThumbsUped === 0
+            ? failMessage
+            : errorMessage}
         </MessageBox>
-        <CloseButton>OK</CloseButton>
+        <CloseButton onClick={() => setThumbsUp(null)}>OK</CloseButton>
       </ModalBox>
     </ModalOuterBox>
   );
 };
 
 const ModalOuterBox = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 90vh;
   background: #ffffff9e;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  z-index: 2;
 `;
 
 const ModalBox = styled.div`
-  width: 90%;
+  width: 50vw;
   height: 200px;
-  background: rgba(249, 242, 203, 0.651);
+  background: ${(props) =>
+    props.id === "1" ? "rgb(243 105 105 / 82%)" : "rgb(105 141 243 / 82%)"};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-`;
-
-const ThumbsUpImg = styled.img`
-  width: 100px;
-  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 20px;
 `;
 
 const MessageBox = styled.div`
   margin-bottom: 10px;
 `;
 
-const MusicName = styled.span`
-  font-weight: bold;
-`;
-
 const CloseButton = styled.button`
-  background-color: rgb(2, 90, 77);
+  background-color: white;
   border-radius: 10px;
-  color: white;
+  color: black;
   font-size: 20px;
   font-weight: bold;
 `;

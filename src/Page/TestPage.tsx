@@ -15,7 +15,7 @@ function chooseQuestionSet() {
 
 const TestPage = () => {
   const [index, setIndex] = useState<number>(0);
-  const [answer, setAnswer] = useRecoilState<number[]>(answerState);
+  const [, setAnswer] = useRecoilState<number[]>(answerState);
   const [questionSet, setQuestionSet] =
     useRecoilState<string>(questionSetState);
   let navigate = useNavigate();
@@ -76,10 +76,9 @@ const QuestionAndAnswerBox = styled.div`
   justify-content: center;
   text-align: center;
   justify-items: center;
-  align-items: center;    
+  align-items: center;
   flex-direction: column;
   align-items: center;
-}
 `;
 
 const QuestionNumber = styled.div`
@@ -87,9 +86,6 @@ const QuestionNumber = styled.div`
   font-size: 25px;
   width: 90%;
   height: 100%;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
 `;
 
 const Question = styled.div`
@@ -97,10 +93,6 @@ const Question = styled.div`
   font-size: 20px;
   width: 80%;
   height: 100%;
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center; */
 `;
 
 const Answer = styled.div`

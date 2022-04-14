@@ -3,9 +3,14 @@ import styled from "styled-components";
 import axios from "axios";
 import MusicBox from "Component/MusicBox";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { mbtiResultState, musicListState } from "Store/stateStore";
+import {
+  mbtiResultState,
+  musicListState,
+  thumbsUpState,
+} from "Store/stateStore";
 import useFetch from "Component/useFetch";
 import Loading from "Component/Loading";
+import Modal from "Component/Modal";
 
 async function searchMusic(q: string, setMusicList: Function) {
   try {
@@ -25,6 +30,7 @@ const MusicRecPage = () => {
   const [musicName, setMusicName] = useState("");
   const [musicList, setMusicList] = useRecoilState(musicListState);
   const mbti_result: any = useRecoilValue(mbtiResultState);
+  const [thumbsUp] = useRecoilState<number | null>(thumbsUpState);
 
   const { loading, error } = useFetch(
     "get",
@@ -63,6 +69,7 @@ const MusicRecPage = () => {
           검색
         </button>
       </SearchBox>
+      {thumbsUp === null ? null : <Modal isThumbsUped={thumbsUp} />}
       <MusicListBox id={musicList.length.toString()}>
         {musicList.map((m: any) => {
           return (
@@ -153,6 +160,7 @@ const MusicListBox = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   & > div {
     margin-left: 5px;
     margin-right: 5px;
