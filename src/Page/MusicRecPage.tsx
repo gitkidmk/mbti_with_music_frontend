@@ -154,12 +154,12 @@ const MusicListBox = styled.div`
   flex-wrap: wrap;
   align-items: center;
   & > div {
-    margin-right: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
   @media screen and (max-height: 1000px) and (max-width: 765px) {
-    flex-direction: column;
-    flex-wrap: nowrap;
     & > div {
+      margin-left: 0px;
       margin-right: 0px;
     }
   }
