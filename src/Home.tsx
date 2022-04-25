@@ -20,6 +20,7 @@ const StartButton = styled.button`
   font-weight: bold;
   background-color: rgb(2, 90, 77);
   line-height: 26px;
+  cursor: pointer;
 `;
 
 function Home() {
