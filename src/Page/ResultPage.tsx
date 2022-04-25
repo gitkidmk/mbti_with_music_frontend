@@ -13,6 +13,7 @@ import Rader from "Component/Rader";
 import MusicBox from "Component/MusicBox";
 import useFetch from "Component/useFetch";
 import Modal from "Component/Modal";
+import NotFoundPage from "Page/NotFoundPage";
 
 const ResultDescription = ({ top, unit }: any) => {
   const top_description = MBTI_description[top];
@@ -104,7 +105,7 @@ const Result = () => {
   return loading ? (
     <Loading />
   ) : error || mbtiResult === undefined ? (
-    <ResultDiv>이런... 에러가 발생했어요ㅜㅜ{error}</ResultDiv>
+    <NotFoundPage />
   ) : (
     <ResultDiv>
       <ResultTitle>
@@ -281,6 +282,7 @@ const UserMusicRecommendButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 const RetryAndShareBox = styled.div`

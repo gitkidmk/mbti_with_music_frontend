@@ -11,6 +11,7 @@ import {
 import useFetch from "Component/useFetch";
 import Loading from "Component/Loading";
 import Modal from "Component/Modal";
+import NotFoundPage from "Page/NotFoundPage";
 
 async function searchMusic(q: string, setMusicList: Function) {
   try {
@@ -46,7 +47,7 @@ const MusicRecPage = () => {
   return loading ? (
     <Loading />
   ) : error || Object.keys(mbti_result).length === 0 ? (
-    <MusicRecBox>이런... 에러가 발생했어요ㅜㅜ{error}</MusicRecBox>
+    <NotFoundPage err_type="50x" />
   ) : (
     <MusicRecBox>
       <MusicRecTitle>
@@ -142,6 +143,7 @@ const SearchBox = styled.div`
     background-color: rgb(2, 90, 77);
     color: white;
     width: 20%;
+    cursor: pointer;
   }
 `;
 
@@ -171,4 +173,15 @@ const MusicListBox = styled.div`
       margin-right: 0px;
     }
   }
+`;
+
+const Title = styled.div`
+  width: 90%;
+  font-weight: bold;
+  height: 50px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
 `;
