@@ -15,7 +15,7 @@ const LoadingImg = styled.img`
 const Loading = () => {
   return (
     <LoadingBox>
-      <LoadingImg alt="loading" src={loading} />;
+      <LoadingImg alt="loading" src={loading} />
     </LoadingBox>
   );
 };
