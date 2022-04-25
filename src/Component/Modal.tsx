@@ -64,5 +64,6 @@ const CloseButton = styled.button`
   color: black;
   font-size: 20px;
   font-weight: bold;
+  cursor: pointer;
 `;
 export default Modal;

@@ -11,6 +11,7 @@ import styled from "styled-components";
 import TestPage from "Page/TestPage";
 import ResultPage from "Page/ResultPage";
 import MusicRecPage from "Page/MusicRecPage";
+import NotFoundPage from "Page/NotFoundPage";
 
 axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "/" : "api/";
 
@@ -41,9 +42,10 @@ ReactDOM.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="question-and-answer" element={<TestPage />} />
-          <Route path="result" element={<ResultPage />} />
-          <Route path="user-recommendation" element={<MusicRecPage />} />
+          <Route path="/question-and-answer" element={<TestPage />} />
+          <Route path="/result" element={<ResultPage />} />
+          <Route path="/user-recommendation" element={<MusicRecPage />} />
+          <Route path="*" element={<NotFoundPage err_type="404" />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
