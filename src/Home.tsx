@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import darami from "Asset/image/darami.png";
+import mkkang from "Asset/image/mkkang.png";
 
 const HomeImage = styled.img`
   width: 200px;
@@ -27,7 +27,7 @@ function Home() {
   let navigate = useNavigate();
   return (
     <>
-      <HomeImage alt="home-image" src={darami} />
+      <HomeImage alt="home-image" src={mkkang} />
       <StartButton onClick={() => navigate(`question-and-answer`)}>
         MBTI with Music <br />
         시작하기
