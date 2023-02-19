@@ -2,7 +2,7 @@
   "name": "mbti_with_music_frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "@nivo/core": "^0.79.0",
     "@nivo/radar": "^0.79.1",
