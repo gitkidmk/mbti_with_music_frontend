@@ -12,6 +12,7 @@ import useFetch from "Component/useFetch";
 import Loading from "Component/Loading";
 import Modal from "Component/Modal";
 import NotFoundPage from "Page/NotFoundPage";
+import { Link } from "react-router-dom";
 
 async function searchMusic(q: string, setMusicList: Function) {
   try {
@@ -50,9 +51,12 @@ const MusicRecPage = () => {
     <NotFoundPage err_type="50x" />
   ) : (
     <MusicRecBox>
-      <MusicRecTitle>
-        <h1>내가 직접 추천하는 {mbti_result.MBTI_result.top_result} 음악😍</h1>
-      </MusicRecTitle>
+      <Header>
+        <MusicRecTitle>
+          <h1>내가 추천하는 {mbti_result.MBTI_result.top_result} 음악😍</h1>
+        </MusicRecTitle>
+        <Link to="/result">결과 다시 보기</Link>
+      </Header>
       <SearchBox>
         <input
           type={"text"}
@@ -98,6 +102,14 @@ const MusicRecBox = styled.div`
   grid-template-rows: 120px 80px calc(90vh - 200px);
   justify-items: center;
   align-items: center;
+`;
+
+const Header = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
 `;
 
 const MusicRecTitle = styled.div`
