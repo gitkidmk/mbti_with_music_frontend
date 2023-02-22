@@ -8,7 +8,7 @@ services:
       - "3000:80"
     environment:
       - NGINX_HOST=back
-      - NGINX_PORT=5000
+      - NGINX_PORT=4000
     depends_on:
       - back
   back:
@@ -16,7 +16,7 @@ services:
     build:
       context: ../mbti_with_music_backend
     ports:
-      - "5000:5000"
+      - "4000:4000"
     environment:
       - DB_HOST=db
     depends_on:
@@ -25,5 +25,10 @@ services:
     container_name: db
     build:
       context: ../mbti_with_music_db
+    environment:
+      - MARIADB_USER=mbti_music
+      - MARIADB_PASSWORD=mbti_music
+      - MARIADB_DATABASE=mbti_music
+      - MARIADB_ROOT_PASSWORD=mariadb
     ports:
       - "3307:3306"
