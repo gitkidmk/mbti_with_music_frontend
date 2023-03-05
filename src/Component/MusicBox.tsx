@@ -13,6 +13,7 @@ async function thumbsUpMusic(
   music_id: string,
   music_name: string,
   thumbnail: string,
+  description: string,
   mbti_name: string,
   setThumbsUp: Function
 ) {
@@ -20,10 +21,11 @@ async function thumbsUpMusic(
     const isThumbsUped = await axios.post("/musics/like", {
       music_id: music_id,
       music_name: music_name,
+      description: description,
       thumbnail: thumbnail,
       mbti_name: mbti_name,
     });
-    setThumbsUp(isThumbsUped.data);
+    setThumbsUp(isThumbsUped.data.accepted ? 1 : 0);
   } catch (error) {
     console.error(error);
     setThumbsUp(-1);
@@ -32,9 +34,9 @@ async function thumbsUpMusic(
 
 const MusicBox = ({
   title,
-  description,
-  thumbnailURL,
   videoId,
+  thumbnailURL,
+  description,
   mbti,
   great_count,
 }: any) => {
@@ -101,7 +103,14 @@ const MusicBox = ({
           fill={stringColor}
           style={{ height: "50px", width: "50px" }}
           onClick={() =>
-            thumbsUpMusic(videoId, title, thumbnailURL, mbti, setThumbsUp)
+            thumbsUpMusic(
+              videoId,
+              title,
+              thumbnailURL,
+              description,
+              mbti,
+              setThumbsUp
+            )
           }
         />
         {great_count && (
