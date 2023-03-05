@@ -36,7 +36,7 @@ const MusicRecPage = () => {
 
   const { loading, error } = useFetch(
     "get",
-    "/music/search",
+    "/musics/search",
     {
       params: {
         music_name: musicName,

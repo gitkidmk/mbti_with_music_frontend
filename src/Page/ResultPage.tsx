@@ -90,7 +90,7 @@ const Result = () => {
   const [thumbsUp] = useRecoilState<number | null>(thumbsUpState);
   const { loading, error } = useFetch(
     "post",
-    "/mbti-results",
+    "/results",
     {
       data: {
         question_set: question_set,

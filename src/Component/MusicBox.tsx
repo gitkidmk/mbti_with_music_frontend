@@ -17,7 +17,7 @@ async function thumbsUpMusic(
   setThumbsUp: Function
 ) {
   try {
-    const isThumbsUped = await axios.post("/music/thumbs-up", {
+    const isThumbsUped = await axios.post("/musics/like", {
       music_id: music_id,
       music_name: music_name,
       thumbnail: thumbnail,
