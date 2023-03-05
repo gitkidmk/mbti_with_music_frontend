@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 
 async function searchMusic(q: string, setMusicList: Function) {
   try {
-    const response = await axios.get("/music/search", {
+    const response = await axios.get("/musics/search", {
       params: {
         music_name: q,
       },
@@ -36,7 +36,7 @@ const MusicRecPage = () => {
 
   const { loading, error } = useFetch(
     "get",
-    "/music/search",
+    "/musics/search",
     {
       params: {
         music_name: musicName,
@@ -47,13 +47,13 @@ const MusicRecPage = () => {
 
   return loading ? (
     <Loading />
-  ) : error || Object.keys(mbti_result).length === 0 ? (
+  ) : error || musicList.musics.length === 0 ? (
     <NotFoundPage err_type="50x" />
   ) : (
     <MusicRecBox>
       <Header>
         <MusicRecTitle>
-          <h1>내가 추천하는 {mbti_result.MBTI_result.top_result} 음악😍</h1>
+          <h1>내가 추천하는 {mbti_result.mbti.topType} 음악😍</h1>
         </MusicRecTitle>
         <Link to="/result">결과 다시 보기</Link>
       </Header>
@@ -75,15 +75,15 @@ const MusicRecPage = () => {
         </button>
       </SearchBox>
       {thumbsUp === null ? null : <Modal isThumbsUped={thumbsUp} />}
-      <MusicListBox id={musicList.length.toString()}>
-        {musicList.map((m: any) => {
+      <MusicListBox id={musicList.musics.length.toString()}>
+        {musicList.musics.map((music: any) => {
           return (
             <MusicBox
-              title={m.snippet.title}
-              description={m.snippet.description}
-              thumbnailURL={m.snippet.thumbnails.high.url}
-              videoId={m.id.videoId}
-              mbti={mbti_result.MBTI_result.top_result}
+              title={music.music_name}
+              description={music.description}
+              thumbnailURL={music.thumbnail}
+              videoId={music.music_id}
+              mbti={mbti_result.mbti.topType}
               great_count={null}
             />
           );

@@ -63,7 +63,7 @@ const RecommendedMusic = ({ music, mbti }: any) => {
           <MusicBox
             key={m.music_id}
             title={m.music_name}
-            description={m.artist}
+            description={m.description}
             thumbnailURL={m.thumbnail}
             videoId={m.music_id}
             mbti={mbti}
@@ -90,11 +90,11 @@ const Result = () => {
   const [thumbsUp] = useRecoilState<number | null>(thumbsUpState);
   const { loading, error } = useFetch(
     "post",
-    "/mbti-results",
+    "/results",
     {
       data: {
         question_set: question_set,
-        answer: answer,
+        answers: answer,
       },
     },
     setMbtiResult
@@ -109,22 +109,22 @@ const Result = () => {
   ) : (
     <ResultDiv>
       <ResultTitle>
-        <h1>{mbtiResult.MBTI_result.top_result}</h1>
+        <h1>{mbtiResult.mbti.topType}</h1>
       </ResultTitle>
       <RaderBox>
-        <Rader data={mbtiResult.MBTI_result.all_result} />
+        <Rader data={mbtiResult.mbti.entireTypeRough} />
       </RaderBox>
       <ResultDescription
-        top={mbtiResult.MBTI_result.top_result}
-        unit={mbtiResult.MBTI_result.top_result_detail}
+        top={mbtiResult.mbti.topType}
+        unit={mbtiResult.mbti.topTypeDetail}
       />
       <RecommendedMusicTitle>
-        {mbtiResult.MBTI_result.top_result}를 위한 음악😊
+        {mbtiResult.mbti.topType}를 위한 음악😊
       </RecommendedMusicTitle>
       {thumbsUp === null ? null : <Modal isThumbsUped={thumbsUp} />}
       <RecommendedMusic
-        music={mbtiResult.MBTI_music}
-        mbti={mbtiResult.MBTI_result.top_result}
+        music={mbtiResult.musics}
+        mbti={mbtiResult.mbti.topType}
       />
       <UserMusicRecommendButton
         onClick={() => navigate("/user-recommendation")}

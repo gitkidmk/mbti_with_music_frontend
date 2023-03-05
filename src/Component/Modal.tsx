@@ -16,9 +16,9 @@ const Modal = ({ isThumbsUped }: ModalProps) => {
       <ModalBox id={thumbsUp?.toString()}>
         <ThumbsUp fill="#ffffff" style={{ height: "100px", width: "100px" }} />
         <MessageBox>
-          {isThumbsUped === 1
+          {isThumbsUped
             ? passMessage
-            : isThumbsUped === 0
+            : !isThumbsUped
             ? failMessage
             : errorMessage}
         </MessageBox>
