@@ -55,7 +55,7 @@ const MusicRecPage = () => {
         <MusicRecTitle>
           <h1>내가 추천하는 {mbti_result.mbti.topType} 음악😍</h1>
         </MusicRecTitle>
-        <Link to="/result">결과 다시 보기</Link>
+        <Link to="/result">{mbti_result.mbti.topType} 결과페이지로</Link>
       </Header>
       <SearchBox>
         <input
@@ -76,18 +76,17 @@ const MusicRecPage = () => {
       </SearchBox>
       {thumbsUp === null ? null : <Modal isThumbsUped={thumbsUp} />}
       <MusicListBox id={musicList.musics.length.toString()}>
-        {musicList.musics.map((music: any) => {
-          return (
-            <MusicBox
-              title={music.music_name}
-              description={music.description}
-              thumbnailURL={music.thumbnail}
-              videoId={music.music_id}
-              mbti={mbti_result.mbti.topType}
-              great_count={null}
-            />
-          );
-        })}
+        {musicList.musics.map((music: any) => (
+          <MusicBox
+            key={music.music_id}
+            title={music.music_name}
+            description={music.description}
+            thumbnailURL={music.thumbnail}
+            videoId={music.music_id}
+            mbti={mbti_result.mbti.topType}
+            great_count={null}
+          />
+        ))}
       </MusicListBox>
     </MusicRecBox>
   );

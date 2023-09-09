@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MBTI_description, MBTI_unit_description } from "Asset/data";
 import { useRecoilValue, useRecoilState } from "recoil";
 import {
@@ -57,8 +58,6 @@ const RecommendedMusic = ({ music, mbti }: any) => {
   return (
     <RecommendedMusicBox>
       {music.map((m: any) => {
-        m = JSON.parse(m);
-
         return (
           <MusicBox
             key={m.music_id}
@@ -131,6 +130,7 @@ const Result = () => {
       >
         나만의 MBTI 음악 추천하기
       </UserMusicRecommendButton>
+      <Link to="/question-and-answer">다시 검사하기</Link>
       <RetryAndShare />
     </ResultDiv>
   );

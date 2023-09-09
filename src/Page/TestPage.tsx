@@ -26,7 +26,6 @@ const TestPage = () => {
     const q_set = chooseQuestionSet();
     setQuestionSet(q_set);
     setAnswer([]);
-    console.log("초기화");
   }, [setQuestionSet, setAnswer]);
 
   useEffect(() => {
