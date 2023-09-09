@@ -13,7 +13,7 @@ import ResultPage from "Page/ResultPage";
 import MusicRecPage from "Page/MusicRecPage";
 import NotFoundPage from "Page/NotFoundPage";
 
-axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "/" : "/api";
+axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "/" : "api/";
 
 const OuterDiv = styled.div`
   @media screen and (max-width: 768px) {

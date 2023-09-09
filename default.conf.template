@@ -11,6 +11,7 @@ server {
     }
     location /api/ {
         proxy_pass http://${NGINX_HOST}:${NGINX_PORT}/;
+        access_log /var/log/nginx/proxy_pass.log;
     }
 
     #error_page  404              /404.html;
