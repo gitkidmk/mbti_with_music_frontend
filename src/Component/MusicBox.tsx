@@ -198,7 +198,8 @@ const noSlide = keyframes`
 `;
 
 const Title = styled.div`
-  height: 40px;
+  height: auto;
+  margin: 3px;
   display: flex;
   align-items: center;
   overflow: hidden;
