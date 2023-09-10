@@ -16,7 +16,7 @@ FE와 BE는 build/master 브랜치에 배포에 사용 가능한 Dockerfile과 d
 연관된 프로젝트 링크는 아래와 같습니다. 😎 <br/>
 FE: [https://github.com/gitkidmk/mbti_with_music_frontend](https://github.com/gitkidmk/mbti_with_music_frontend) <br/>
 BE: [https://github.com/gitkidmk/mbti_with_music_backend](https://github.com/gitkidmk/mbti_with_music_backend) <br/>
-DB: [https://github.com/gitkidmk/mbti_with_music_db](https://github.com/gitkidmk/mbti_with_music_frontend) <br/>
+DB: [https://github.com/gitkidmk/mbti_with_music_db](https://github.com/gitkidmk/mbti_with_music_db) <br/>
 GKE: [https://github.com/gitkidmk/gke-test](https://github.com/gitkidmk/gke-test)
 <br/>
 
