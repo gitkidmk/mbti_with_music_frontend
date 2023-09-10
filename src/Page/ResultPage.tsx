@@ -15,6 +15,7 @@ import MusicBox from "Component/MusicBox";
 import useFetch from "Component/useFetch";
 import Modal from "Component/Modal";
 import NotFoundPage from "Page/NotFoundPage";
+import NotNormalPage from "./NotNormalPage";
 
 const ResultDescription = ({ top, unit }: any) => {
   const top_description = MBTI_description[top];
@@ -137,7 +138,9 @@ const Result = () => {
 };
 
 const ResultPage = () => {
-  return <Result />;
+  const answer = useRecoilValue(answerState);
+
+  return answer.length == 0 ? <NotNormalPage /> : <Result />;
 };
 
 export default ResultPage;
